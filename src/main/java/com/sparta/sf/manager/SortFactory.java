@@ -6,6 +6,7 @@ import com.sparta.sf.sorters.Sorter;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Properties;
 
 public class SortFactory {
@@ -20,19 +21,19 @@ public class SortFactory {
 //        }
 //    }
 
-    public static Sorter getInstance() {
-        try {
+    public static Optional<Sorter> getInstance() {
+        try (FileReader reader = new FileReader("resources/sort.properties")) {
             Properties properties = new Properties();
-            properties.load(new FileReader("resources/sort.properties"));
+            properties.load(reader);
             String name = properties.getProperty("sorter");
             if (name.equals("bubble")) {
-                return new BubbleSorter();
+                return Optional.of(new BubbleSorter());
             } else if (name.equals("merge")) {
-                return new MergeSorter();
+                return Optional.of(new MergeSorter());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.ofNullable(null);
     }
 }
