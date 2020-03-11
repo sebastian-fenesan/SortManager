@@ -15,4 +15,5 @@ public class DisplayManager {
     public static void displaySortType(String type) {
         System.out.println("Sorted using " + type);
     }
+
 }

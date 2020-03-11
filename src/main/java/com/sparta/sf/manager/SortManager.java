@@ -8,14 +8,17 @@ import java.util.Optional;
 
 public class SortManager {
 
-    public void runSorter (int[] unsortedArray) throws SorterException {
-        Optional<Sorter> opt = SortFactory.getInstance();
-        if (opt.isPresent()) {
-            Sorter sorter = opt.get();
+    public void runSorter(int[] unsortedArray) {
+        Sorter sorter = SortFactory.getInstance();
+        if (sorter != null) {
             int[] sortedArray = sorter.sortArray(unsortedArray.clone());
             displayOutput(unsortedArray, sortedArray, sorter.toString());
         } else {
-            throw new SorterException("Unable to create the stated Sorter.");
+            try {
+                throw new SorterException("Unable to create the stated Sorter.");
+            } catch (SorterException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
