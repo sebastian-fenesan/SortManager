@@ -1,5 +1,7 @@
 package com.sparta.sf.exceptions;
 
+import org.apache.log4j.Logger;
+
 public class SorterException extends Exception {
 
     private String message;

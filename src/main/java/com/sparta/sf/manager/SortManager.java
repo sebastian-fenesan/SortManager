@@ -1,12 +1,17 @@
 package com.sparta.sf.manager;
 
 import com.sparta.sf.display.DisplayManager;
+import com.sparta.sf.display.Starter;
 import com.sparta.sf.exceptions.SorterException;
 import com.sparta.sf.sorters.Sorter;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.util.Optional;
 
 public class SortManager {
+
+    private Logger log = Logger.getLogger(SortManager.class.getName());
 
     public void runSorter(int[] unsortedArray) {
         Sorter sorter = SortFactory.getInstance();
@@ -15,9 +20,9 @@ public class SortManager {
             displayOutput(unsortedArray, sortedArray, sorter.toString());
         } else {
             try {
-                throw new SorterException("Unable to create the stated Sorter.");
+                throw new SorterException("Unable to create the stated sorter.");
             } catch (SorterException e) {
-                System.out.println(e.getMessage());
+                log.debug(e.getMessage());
             }
         }
     }
@@ -27,5 +32,7 @@ public class SortManager {
         DisplayManager.displaySortType(type);
         DisplayManager.displaySortedArray(sortedArray);
     }
+
+
 
 }
